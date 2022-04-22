@@ -124,19 +124,8 @@ def tearDown():
         driver.close()
         driver.quit()
 
-        logger('delleted')
+        
 
-def logger(action: object):
-    old_instance = sys.stdout
-    log_file = open('message.log', 'a')
-    sys.stdout = log_file
-    print(f'{locators.email}\t'
-          f'{locators.username}\t'
-          f'{locators.password}\t'
-          f'{datetime.datetime.now()}\t'
-          f'{action}')
-    sys.stdout = old_instance
-    log_file.close()
 
 setUp()
 login()
