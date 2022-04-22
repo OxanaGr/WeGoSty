@@ -35,9 +35,9 @@ def login():
 
 def log_out():
     sleep(8)
-    driver.find_element(By.ID,'navbar-nav').click()
+    driver.find_element(By.XPATH,'//div[@id="navbar-nav"]/ul[2]/li[2]/a/span').click()
     sleep(1)
-    driver.find_element(By.XPATH, '//*[@id="navbar-nav"]/ul[2]/li[2]/div/a[4]').click()
+    driver.find_element(By.LINK_TEXT, 'Log out').click()
 
 def create_new_student():
     driver.find_element(By.LINK_TEXT, 'My WeGoStudy').click()
@@ -53,8 +53,6 @@ def create_new_student():
     sleep(0.3)
     driver.find_element(By.ID, 'user_student_detail_attributes_preferred_name').send_keys(locators.first_name)
     sleep(0.3)
-    # driver.find_element(By.ID, 'user_student_detail_attributes_passport_number').send_keys(locators.passport_number)
-    # sleep(1)
     driver.find_element(By.ID, 'phone_number').send_keys(locators.phone_number)
     sleep(0.3)
     driver.find_element(By.ID, 'select2-user_student_detail_attributes_country_of_citizenship-container').click()
@@ -99,17 +97,14 @@ def create_new_student():
     sleep(0.3)
     driver.find_element(By.ID, 'user_student_detail_attributes_user_educations_attributes_0_program').send_keys('SQTA')
     sleep(0.3)
-    # _______________________________________
-    driver.find_element(By.LINK_TEXT, 'GPA Scale').click()
+    driver.find_element(By.XPATH, '//div[@id="user_student_detail_attributes_user_educations_attributes_0_gpa_scale_chosen"]/a/span').click()
     sleep(0.3)
-    driver.find_element(By.XPATH, '//*[@id="user_student_detail_attributes_user_educations_attributes_0_gpa_scale_chosen"]/div/div/input').send_keys('100')
-    sleep(0.3)
-    driver.find_element(By.XPATH, '//*[@id="user_student_detail_attributes_user_educations_attributes_0_gpa_scale_chosen"]/a/span').select_by_visible_text('100')
+    driver.find_element(By.XPATH, '//div[@id="user_student_detail_attributes_user_educations_attributes_0_gpa_scale_chosen"]/div/ul/li[5]').click()
     sleep(0.3)
     # __________________________________________
     driver.find_element(By.ID, 'user_student_detail_attributes_user_educations_attributes_0_gpa').send_keys('4.0')
     sleep(0.3)
-    # driver.find_element(By.XPATH, '//input[@value="Save"]').click()
+    driver.find_element(By.XPATH, '//input[@value="Save"]').click()
 
 
 def create_application():
@@ -148,6 +143,6 @@ login()
 # create_application()
 create_new_student()
 # search_student()
-# deletet_studnt()
-# log_out()
+# delete_studnt()
+log_out()
 # tearDown()
