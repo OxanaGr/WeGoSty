@@ -107,14 +107,6 @@ def create_new_student():
     driver.find_element(By.XPATH, '//input[@value="Save"]').click()
 
 
-def create_application():
-    sleep(1)
-    driver.find_element(By.XPATH, '//*[@id="navbar-nav"]/ul[1]/li[1]/a/span').click()
-    sleep(1)
-    driver.find_element(By.XPATH, '//*[@id="navbar-nav"]/ul[1]/li[1]/div/a[3]').click()
-    sleep(1)
-    driver.find_element(By.XPATH, '/html/body/section/div/div/div/div/div/a').click()
-    sleep(1)
 
 
 def tearDown():
