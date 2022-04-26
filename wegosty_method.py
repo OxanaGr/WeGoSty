@@ -20,7 +20,7 @@ def setUp():
         print(f' WeGoStudy URL: {driver.current_url}')
 
 def login():
-    driver.find_element(By.XPATH,'//button[@class="You need to sign up or sign in before continuing').click()
+    driver.find_element(By.XPATH,'//*[@id="toast-container"]'').click()
     sleep(1)
     driver.find_element(By.LINK_TEXT, 'LOGIN').click()
     sleep(1)
