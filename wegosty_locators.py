@@ -11,6 +11,7 @@ phone_number = fake.phone_number()
 # apartment_number =
 mailing_address = fake.street_address()
 user_email = fake.email()
+date_of_birth = fake.date()
 # province_state =
 # city =
 postal_code = fake.postalcode()
