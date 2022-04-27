@@ -102,7 +102,7 @@ def create_new_student():
     sleep(0.3)
     driver.find_element(By.ID, 'user_student_detail_attributes_user_educations_attributes_0_program').send_keys('SQTA')
     sleep(0.3)
-    driver.find_element(By.XPATH, '//div[@id="user_student_detail_attributes_user_educations_attributes_0_gpa_scale_chosen"]').click()
+    driver.find_element(By.LINK_TEXT, 'GPA Scale').click()
     sleep(0.3)
     driver.find_element(By.XPATH, '//div[@id="user_student_detail_attributes_user_educations_attributes_0_gpa_scale_chosen"]/div/ul/li[5]').click()
     sleep(0.3)
