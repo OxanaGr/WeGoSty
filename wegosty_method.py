@@ -67,7 +67,7 @@ def create_new_student():
     sleep(0.3)
     driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').clear()
     sleep(0.3)
-    driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').send_keys('2000 03 1')
+    driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').send_keys(locators.date_of_birth)
     sleep(0.3)
     # __________________Contact Information______________________________
     driver.find_element(By.ID, 'user_student_detail_attributes_address_attributes_mailing_address').send_keys(locators.mailing_address)
