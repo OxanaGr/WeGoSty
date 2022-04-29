@@ -13,3 +13,5 @@ mailing_address = fake.street_address()
 user_email = fake.email()
 postal_code = fake.postalcode()
 date_of_birth = fake.date_of_birth(minimum_age = 16)
+
+
