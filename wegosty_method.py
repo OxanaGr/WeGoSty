@@ -22,6 +22,8 @@ def setUp():
     if driver.current_url == locators.wegosty_homepage_url:
         print(f' WeGoStudy URL: {driver.current_url}')
         print(f'__________________Test started successfully at {datetime.datetime.now()}__________________')
+    # assert driver.current_url == locators.wegosty_homepage_url
+
 
 def login():
     driver.find_element(By.CSS_SELECTOR, '.toast-message').click()
@@ -32,7 +34,10 @@ def login():
     sleep(0.3)
     driver.find_element(By.ID, 'user_password').send_keys(f'123cctb')
     sleep(0.3)
+    # driver.find_element(By.ID, 'user_password').send_keys(f'123cctb{Keys.ENTER}')
     driver.find_element(By.CSS_SELECTOR, 'input[value="SIGN IN"]').click()
+     # driver.find_element(By.CSS_SELECTOR, 'input[type="submit"]').click()
+    # driver.find_element(By.XPATH, "//input[@value='SIGN IN']").click()
     assert driver.find_element(By.LINK_TEXT, 'Ch Velasco').is_displayed()
     print(f'________Signed in successfully! at {datetime.datetime.now()}_________')
 
@@ -45,6 +50,8 @@ def log_out():
     driver.find_element(By.LINK_TEXT, 'Log out').click()
     if driver.find_element(By.XPATH, '//div[@id="toast-container"]').is_displayed():
         print(f'________Singed out successfully! at {datetime.datetime.now()}_________')
+    # driver.find_element(By.XPATH, '//div[@id="toast-container"]').click()
+
 
 def create_new_student():
     driver.find_element(By.LINK_TEXT, 'My WeGoStudy').click()
@@ -60,26 +67,29 @@ def create_new_student():
     sleep(0.3)
     driver.find_element(By.ID, 'user_student_detail_attributes_preferred_name').send_keys(locators.first_name)
     sleep(0.3)
-    driver.find_element(By.ID, 'phone_number').send_keys(locators.phone_number)
-    sleep(0.3)
-    driver.find_element(By.CSS_SELECTOR, 'span[title="Country of citizenship"]').click()
-    sleep(0.3)
-    driver.find_element(By.CSS_SELECTOR, 'input[role="searchbox"]').send_keys(f'Canada{Keys.ENTER}')
-    sleep(0.3)
-    driver.find_element(By.ID,'user_student_detail_attributes_passport_number').send_keys(locators.passport_number)
-    sleep(0.3)
     driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').send_keys(Keys.ENTER)
     sleep(0.3)
     driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').clear()
     sleep(0.3)
-    driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').send_keys('20000202')
+    driver.find_element(By.CSS_SELECTOR, 'input[placeholder="Date of Birth on passport"]').send_keys('20000202')
+    # driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').send_keys(locators.date_of_birth)
+    # driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').send_keys(f'{locators.date_of_birth}{Keys.ENTER}')
+    sleep(0.3)
+    driver.find_element(By.ID, 'phone_number').send_keys(locators.phone_number)
+    sleep(0.3)
+    driver.find_element(By.CSS_SELECTOR, 'span[title="Country of citizenship"]').click()
+    sleep(0.3)
+    driver.find_element(By.CSS_SELECTOR, 'input[role="searchbox"]').send_keys(f'Cameroon{Keys.ENTER}')
+    sleep(0.3)
+    driver.find_element(By.ID,'user_student_detail_attributes_passport_number').send_keys(locators.passport_number)
     sleep(0.3)
     # __________________Contact Information______________________________
     driver.find_element(By.ID, 'user_student_detail_attributes_address_attributes_mailing_address').send_keys(locators.mailing_address)
     sleep(0.3)
     driver.find_element(By.LINK_TEXT, 'Country').click()
     sleep(0.3)
-    driver.find_element(By.XPATH, '//*[@id="user_student_detail_attributes_address_attributes_country_chosen"]/div/ul/li[40]').click()
+    driver.find_element(By.XPATH, '//*[@id="user_student_detail_attributes_address_attributes_country_chosen"]/div/div/input').send_keys(f'Canada{Keys.ENTER}')
+    # driver.find_element(By.XPATH, '//*[@id="user_student_detail_attributes_address_attributes_country_chosen"]/div/ul/li[40]').click()
     sleep(0.6)
     driver.find_element(By.LINK_TEXT, 'Province/State').click()
     sleep(0.6)
@@ -109,11 +119,39 @@ def create_new_student():
     # __________________________________________
     driver.find_element(By.ID, 'user_student_detail_attributes_user_educations_attributes_0_gpa').send_keys(f'4.0 {Keys.ENTER}')
     sleep(0.3)
+    # driver.find_element(By.XPATH, '//input[@value="Save"]').submit()
     # __________________________________________
+
     print(f'The new student {locators.first_name} {locators.last_name} is created.')
     print(f'Personal Information: Date Of Birth - {locators.date_of_birth}, Passport Number - {locators.passport_number}, Citizenship - Canada, Phone Number - {locators.phone_number}')
     print(f'Contact Information: Mailing Address - {locators.mailing_address}, Country - Canada, State - BC, City -  Burnaby, Postal Code - {locators.postal_code}')
+    # print(f'Credential -, School Name -, Program -, GPA Scale -, Scored GPA - ')
     print('___________________________________________')
+
+
+
+def create_application():
+    driver.find_element(By.LINK_TEXT, 'My WeGoStudy').click()
+    sleep(0.6)
+    driver.find_element(By.LINK_TEXT, 'Application').click()
+    sleep(0.6)
+    driver.find_element(By.LINK_TEXT,'Create Application').click()
+    sleep(0.6)
+    driver.find_element(By.ID, 'select2-admission_institute_detail_id-container').click()
+    sleep(0.6)
+    # driver.find_element(By.XPATH, '//div[@id="admission_institute_program_id_chosen"]/a/span').click()
+    # sleep(0.6)
+
+def search_student():
+    driver.find_element(By.LINK_TEXT, 'My WeGoStudy').click()
+    sleep(0.6)
+    driver.find_element(By.LINK_TEXT, 'Students').click()
+    sleep(0.6)
+    driver.find_element(By.ID, 'search').send_keys(locators.first_name, locators.last_name)
+    sleep(0.6)
+    driver.find_element(By.NAME, 'commit').click()
+
+
 
 def tearDown():
     if driver is not None:
@@ -122,12 +160,29 @@ def tearDown():
         driver.close()
         driver.quit()
 
-        
+        logger('delleted')
+
+def logger(action: object):
+    old_instance = sys.stdout
+    log_file = open('message.log', 'a')
+    sys.stdout = log_file
+    # print(f'{locators.user_email}\t'
+    #       f'{locators.first_name}\t'
+    #       f'{locators.last_name}\t'
+    #       f'{locators.mailing_address}\t'
+    #       f'{locators.postal_code}\t'
+    #       f'{datetime.phone_number()}\t'
+    #       f'{datetime.datetime.now()}\t'
+    #       f'{action}')
+    sys.stdout = old_instance
+    log_file.close()
+
 setUp()
 login()
 # create_application()
 create_new_student()
+# create_application()
 # search_student()
 # delete_studnt()
-log_out()
-tearDown()
+# log_out()
+# tearDown()
