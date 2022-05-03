@@ -26,6 +26,7 @@ def setUp():
 
 
 def login():
+    sleep(0.3)
     driver.find_element(By.CSS_SELECTOR, '.toast-message').click()
     sleep(0.3)
     driver.find_element(By.LINK_TEXT, 'LOGIN').click()
@@ -117,9 +118,9 @@ def create_new_student():
     driver.find_element(By.XPATH, '//div[@id="user_student_detail_attributes_user_educations_attributes_0_gpa_scale_chosen"]/div/ul/li[5]').click()
     sleep(0.3)
     # __________________________________________
-    driver.find_element(By.ID, 'user_student_detail_attributes_user_educations_attributes_0_gpa').send_keys(f'4.0 {Keys.ENTER}')
+    driver.find_element(By.ID, 'user_student_detail_attributes_user_educations_attributes_0_gpa').send_keys(f'4.0')
     sleep(0.3)
-    # driver.find_element(By.XPATH, '//input[@value="Save"]').submit()
+    driver.find_element(By.XPATH, '//input[@value="Save"]').submit()
     # __________________________________________
 
     print(f'The new student {locators.first_name} {locators.last_name} is created.')
@@ -166,14 +167,14 @@ def logger(action: object):
     old_instance = sys.stdout
     log_file = open('message.log', 'a')
     sys.stdout = log_file
-    # print(f'{locators.user_email}\t'
-    #       f'{locators.first_name}\t'
-    #       f'{locators.last_name}\t'
-    #       f'{locators.mailing_address}\t'
-    #       f'{locators.postal_code}\t'
-    #       f'{datetime.phone_number()}\t'
-    #       f'{datetime.datetime.now()}\t'
-    #       f'{action}')
+    print(f'{locators.user_email}\t'
+          f'{locators.first_name}\t'
+          f'{locators.last_name}\t'
+          f'{locators.mailing_address}\t'
+          f'{locators.postal_code}\t'
+          f'{locators.phone_number}\t'
+          f'{datetime.datetime.now()}\t'
+          f'{action}')
     sys.stdout = old_instance
     log_file.close()
 
@@ -184,5 +185,5 @@ create_new_student()
 # create_application()
 # search_student()
 # delete_studnt()
-# log_out()
-# tearDown()
+log_out()
+tearDown()
