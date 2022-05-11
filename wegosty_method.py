@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 import sys
 import random
 from selenium.webdriver.common.keys import Keys
+from  openpyxl import Workbook
 
 
 s = Service(executable_path='chromedriver.exe')
@@ -176,6 +177,25 @@ def logger(action: object):
     #       f'{action}')
     sys.stdout = old_instance
     log_file.close()
+    
+    
+    # def xlsx_data():
+#     from  openpyxl import Workbook
+#     import openpyxl as O
+#     Exel_file = "C:\\Users\\ks\\Desktop\\OXANA\\QA\\wgsty\\WEG_test_result.xlsx"
+#     wb = O.load_workbook(Exel_file)
+#     ws = wb.active
+# # _______________________________________________________
+#     ws['A4'] = f'{locators.first_name}'
+#     ws['B4'] = f'{locators.last_name}'
+#     ws['C4'] = f'{locators.passport_number}'
+#     ws['D4'] = f'{locators.mailing_address}'
+#     ws['E4'] = f'{locators.postal_code}'
+#     ws['F4'] = f'{locators.phone_number}'
+#     ws['G4'] = f'{locators.user_email}'
+#     ws['H4'] = f'{datetime.datetime.now()}'
+#     ws['I4'] = "test result"
+#     wb.save(Exel_file)
 
 setUp()
 login()
@@ -184,5 +204,6 @@ create_new_student()
 # create_application()
 # search_student()
 # delete_studnt()
+# xlsx_data()
 # log_out()
 # tearDown()
