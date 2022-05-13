@@ -39,7 +39,7 @@ def login():
     driver.find_element(By.CSS_SELECTOR, 'input[value="SIGN IN"]').click()
      # driver.find_element(By.CSS_SELECTOR, 'input[type="submit"]').click()
     # driver.find_element(By.XPATH, "//input[@value='SIGN IN']").click()
-    assert driver.find_element(By.LINK_TEXT, 'Ch Velasco').is_displayed()
+    assert driver.find_element(By.CSS_SELECTOR, 'img[alt="Partner"]').is_displayed()
     print(f'________Signed in successfully! at {datetime.datetime.now()}_________')
 
 def log_out():
