@@ -144,11 +144,18 @@ def create_application():
     # sleep(0.6)
 
 def search_student():
+    from openpyxl import Workbook
+    import openpyxl as O
+    Exel_file = "C:\\Users\\ks\\Desktop\\OXANA\\QA\\wgsty\\WEG_test_result.xlsx"
+    wb = O.load_workbook(Exel_file)
+    ws = wb.active
+
     driver.find_element(By.LINK_TEXT, 'My WeGoStudy').click()
     sleep(0.6)
     driver.find_element(By.LINK_TEXT, 'Students').click()
     sleep(0.6)
-    driver.find_element(By.ID, 'search').send_keys(locators.first_name, locators.last_name)
+    # driver.find_element(By.ID, 'search').send_keys(locators.first_name, locators.last_name)
+    driver.find_element(By.ID, 'search').send_keys (ws['A5'].value,' ', ws['B5'].value)
     sleep(0.6)
     driver.find_element(By.NAME, 'commit').click()
 
