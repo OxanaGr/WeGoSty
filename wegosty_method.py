@@ -179,23 +179,17 @@ def logger(action: object):
     log_file.close()
     
     
-    # def xlsx_data():
-#     from  openpyxl import Workbook
-#     import openpyxl as O
-#     Exel_file = "C:\\Users\\ks\\Desktop\\OXANA\\QA\\wgsty\\WEG_test_result.xlsx"
-#     wb = O.load_workbook(Exel_file)
-#     ws = wb.active
-# # _______________________________________________________
-#     ws['A4'] = f'{locators.first_name}'
-#     ws['B4'] = f'{locators.last_name}'
-#     ws['C4'] = f'{locators.passport_number}'
-#     ws['D4'] = f'{locators.mailing_address}'
-#     ws['E4'] = f'{locators.postal_code}'
-#     ws['F4'] = f'{locators.phone_number}'
-#     ws['G4'] = f'{locators.user_email}'
-#     ws['H4'] = f'{datetime.datetime.now()}'
-#     ws['I4'] = "test result"
-#     wb.save(Exel_file)
+def xlsx_data():
+    from  openpyxl import Workbook
+    import openpyxl as O
+    Exel_file = "C:\\Users\\ks\\Desktop\\OXANA\\QA\\wgsty\\WEG_test_result.xlsx"
+    wb = O.load_workbook(Exel_file)
+    ws = wb.active
+    ws.append([f'{locators.first_name}', f'{locators.last_name}', f'{locators.passport_number}', f'{locators.mailing_address}',
+               f'{locators.postal_code}',f'{locators.phone_number}', f'{locators.user_email}', f'{datetime.datetime.now()}',
+               "test result"])
+    wb.save(Exel_file)
+
 
 setUp()
 login()
