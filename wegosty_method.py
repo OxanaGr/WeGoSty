@@ -158,8 +158,50 @@ def search_student():
     driver.find_element(By.ID, 'search').send_keys (ws['A5'].value,' ', ws['B5'].value)
     sleep(0.6)
     driver.find_element(By.NAME, 'commit').click()
+    
 
-
+def My_Referrals():
+    # ___________________________________________________________
+    from openpyxl import Workbook
+    import openpyxl as O
+    Exel_file = "C:\\Users\\ks\\Desktop\\OXANA\\QA\\wgsty\\WEG_test_result.xlsx"
+    wb = O.load_workbook(Exel_file)
+    ws = wb.active
+    # ______________________________________________________________
+    driver.find_element(By.LINK_TEXT, 'My WeGoStudy').click()
+    sleep(0.3)
+    driver.find_element(By.LINK_TEXT, 'Referrals').click()
+    sleep(0.3)
+    driver.find_element(By.LINK_TEXT, 'Create Referral').click()
+    sleep(0.3)
+    # ______________________________________________________________________
+    # driver.find_element(By.NAME, 'referral[first_name]').send_keys(ws['A11'].value)
+    # sleep(0.3)
+    # driver.find_element(By.NAME, 'referral[last_name]').send_keys(ws['B11'].value)
+    # sleep(0.3)
+    # driver.find_element(By.NAME, 'referral[email_id]').send_keys(ws['G11'].value)
+    # _____________________________________________________________________
+    driver.find_element(By.NAME, 'referral[first_name]').send_keys(locators.first_name)
+    sleep(0.3)
+    driver.find_element(By.NAME, 'referral[last_name]').send_keys(locators.last_name)
+    sleep(0.3)
+    driver.find_element(By.NAME, 'referral[email_id]').send_keys(locators.user_email)
+    # _______________________________________________________________________
+    sleep(0.3)
+    driver.find_element(By.NAME, 'school_id').send_keys(f'Douglas College{Keys.ENTER}')
+    sleep(0.3)
+    driver.find_element(By.NAME, 'program_id').send_keys(f'Basic Musicianship Certificate{Keys.ENTER}')
+    sleep(0.3)
+    driver.find_element(By.CSS_SELECTOR, 'input[value="Save"]').click()
+    sleep(0.3)
+    assert driver.find_element(By.XPATH, '//*[@id="referral-thank-you-modal"]'). is_displayed()
+    sleep(0.3)
+    notice = driver.find_element(By.XPATH, '//*[@id="wrapper"]')
+    sleep(0.3)
+    print(f'The confirmation of creation  referral  - is displayed')
+    print('___________________________________________________________________________')
+    
+    
 
 def tearDown():
     if driver is not None:
@@ -205,6 +247,7 @@ create_new_student()
 # create_application()
 # search_student()
 # delete_studnt()
+My_Referrals()
 xlsx_data()
 log_out()
 tearDown()
