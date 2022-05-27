@@ -284,7 +284,7 @@ def logger(action: object):
 def xlsx_data():
     from  openpyxl import Workbook
     import openpyxl as O
-    Exel_file = "C:\\Users\\ks\\Desktop\\OXANA\\QA\\wgsty\\WEG_test_result.xlsx"
+    Exel_file = "xxxxxxxxxxxxxxxxxxx"
     wb = O.load_workbook(Exel_file)
     ws = wb.active
     ws.append([f'{locators.first_name}', f'{locators.last_name}', f'{locators.passport_number}', f'{locators.mailing_address}',
