@@ -8,8 +8,8 @@ from selenium.webdriver.common.by import By
 import sys
 import random
 from selenium.webdriver.common.keys import Keys
-from  openpyxl import Workbook
-
+from openpyxl import Workbook
+from openpyxl.styles import fonts
 
 s = Service(executable_path='chromedriver.exe')
 driver = webdriver.Chrome(service=s)
@@ -27,20 +27,25 @@ def setUp():
 
 
 def login():
-    driver.find_element(By.CSS_SELECTOR, '.toast-message').click()
+    sleep(0.3)
+    # driver.find_element(By.CSS_SELECTOR, '.toast-message').click()
     sleep(0.3)
     driver.find_element(By.LINK_TEXT, 'LOGIN').click()
     sleep(0.3)
-    driver.find_element(By.ID, 'user_email').send_keys('chris.velasco78@gmail.com')
+    # driver.find_element(By.ID, 'user_email').send_keys('chris.velasco78@gmail.com')
+    driver.find_element(By.ID, 'user_email').send_keys(locators.partner_name)
     sleep(0.3)
-    driver.find_element(By.ID, 'user_password').send_keys(f'123cctb')
+    # driver.find_element(By.ID, 'user_password').send_keys(f'123cctb')
+    driver.find_element(By.ID, 'user_password').send_keys(locators.partner_pass)
     sleep(0.3)
     # driver.find_element(By.ID, 'user_password').send_keys(f'123cctb{Keys.ENTER}')
     driver.find_element(By.CSS_SELECTOR, 'input[value="SIGN IN"]').click()
-     # driver.find_element(By.CSS_SELECTOR, 'input[type="submit"]').click()
+    driver.find_element(By.CSS_SELECTOR, 'input[type="submit"]').click()
+    sleep(2)
     # driver.find_element(By.XPATH, "//input[@value='SIGN IN']").click()
     assert driver.find_element(By.CSS_SELECTOR, 'img[alt="Partner"]').is_displayed()
     print(f'________Signed in successfully! at {datetime.datetime.now()}_________')
+
 
 def log_out():
     sleep(0.8)
@@ -55,6 +60,7 @@ def log_out():
 
 
 def create_new_student():
+    sleep(1)
     driver.find_element(By.LINK_TEXT, 'My WeGoStudy').click()
     sleep(1)
     driver.find_element(By.LINK_TEXT, 'Students').click()
@@ -130,36 +136,66 @@ def create_new_student():
     print('___________________________________________')
 
 
-
 def create_application():
+    l = 0.6
     driver.find_element(By.LINK_TEXT, 'My WeGoStudy').click()
-    sleep(0.6)
-    driver.find_element(By.LINK_TEXT, 'Application').click()
-    sleep(0.6)
-    driver.find_element(By.LINK_TEXT,'Create Application').click()
-    sleep(0.6)
-    driver.find_element(By.ID, 'select2-admission_institute_detail_id-container').click()
-    sleep(0.6)
-    # driver.find_element(By.XPATH, '//div[@id="admission_institute_program_id_chosen"]/a/span').click()
-    # sleep(0.6)
-
-def search_student():
-    from openpyxl import Workbook
-    import openpyxl as O
-    Exel_file = "C:\\Users\\ks\\Desktop\\OXANA\\QA\\wgsty\\WEG_test_result.xlsx"
-    wb = O.load_workbook(Exel_file)
-    ws = wb.active
-
-    driver.find_element(By.LINK_TEXT, 'My WeGoStudy').click()
-    sleep(0.6)
+    sleep(l)
     driver.find_element(By.LINK_TEXT, 'Students').click()
-    sleep(0.6)
-    # driver.find_element(By.ID, 'search').send_keys(locators.first_name, locators.last_name)
-    driver.find_element(By.ID, 'search').send_keys (ws['A5'].value,' ', ws['B5'].value)
-    sleep(0.6)
-    driver.find_element(By.NAME, 'commit').click()
-    
-    
+    sleep(l)
+    driver.find_element(By.LINK_TEXT, 'Create Application').click()
+    sleep(l)
+    # ----------------Course Information----------------#
+    driver.find_element(By.LINK_TEXT, 'Select School').click()
+    sleep(l)
+    driver.find_element(By.CSS_SELECTOR, 'input[class="chosen-search-input"]').send_keys('British Columbia')
+    sleep(l)
+    driver.find_element(By.XPATH, '//*[@id="admission_institute_detail_id_chosen"]/a/span').click()
+    # driver.find_element(By.LINK_TEXT, 'British Columbia Institute of Technology').click()
+    sleep(l)
+    driver.find_element(By.LINK_TEXT, "Select Course").click()
+    driver.find_element(By.XPATH, '//div[@id="admdission_institute_program_id_chosen"]/div/ul/li[2]').click()
+    sleep(l)
+    driver.find_element(By.LINK_TEXT, "Select Starting Semester").click()
+    driver.find_element(By.XPATH, '//div[@id="admission_starting_semester_chosen"]/div/ul/li[2]').click()
+    sleep(l)
+    driver.find_element(By.LINK_TEXT, "Select Start Day").click()
+    driver.find_element(By.XPATH, '//div[@id="admission_start_day_chosen"]/div/ul/li[2]').click()
+    sleep(l)
+    driver.find_element(By.LINK_TEXT, "Select Year").click()
+    driver.find_element(By.XPATH, '//div[@id="admission_start_year_chosen"]/div/ul/li[2]').click()
+    sleep(l)
+    # ----------------Personal Information----------------#
+    driver.find_element(By.XPATH, '//input[@id="admission_date_of_birth"]').clear()
+    driver.find_element(By.XPATH, '//input[@id="admission_date_of_birth"]').click()
+    i = 1
+    while i <= 50:
+        driver.find_element(By.XPATH, '//th[@class="next"]').click()
+        i += 1
+    sleep(l)
+    driver.find_element(By.XPATH, '//div[@class="datepicker-days"]').click()
+    sleep(l)
+    driver.find_element(By.ID, "admission_passport_number").clear()
+    driver.find_element(By.ID, "admission_passport_number").send_keys(locators.passport_number)
+    driver.find_element(By.ID, "admission_cambrian_id").send_keys(locators.college_ID)
+    driver.find_element(By.ID, "admission_study_permit_number").send_keys(locators.student_permit_number)
+    driver.find_element(By.ID, "admission_first_language").send_keys(locators.first_language)
+    driver.find_element(By.XPATH, '//input[@id="admission_date_of_admission"]').clear()
+    sleep(l)
+    # driver.find_element(By.XPATH, '//input[@id="admission_date_of_admission"]').send_keys('05-01-2010')
+    driver.find_element(By.XPATH, '//input[@id="admission_date_of_admission"]').click()
+    sleep(l)
+    i = 1
+    while i <= 3:
+        driver.find_element(By.XPATH, '//th[@class="next"]').click()
+        # driver.find_element(By.XPATH,'//body[1]/div[4]/div[1]/table[1]/thead[1]/tr[1]/th[1]').click()
+        i += 1
+    sleep(l)
+    driver.find_element(By.XPATH, '//div[@class="datepicker-days"]').click()
+    sleep(l)
+    driver.find_element(By.XPATH, "//input[@id='admission_gender_male']").click()
+    driver.find_element(By.XPATH, "//input[@id='admission_stay_type_private_residence']").click()
+    driver.find_element(By.XPATH, "//input[@value='Save']").click()
+
 def My_Referrals():
     # ___________________________________________________________
     from openpyxl import Workbook
@@ -198,8 +234,27 @@ def My_Referrals():
     sleep(0.3)
     notice = driver.find_element(By.XPATH, '//*[@id="wrapper"]')
     sleep(0.3)
-    print(f'The confirmation of creation  referral  - is displyed')
+    print(f'The confirmation of creation  referral  - is displayed')
     print('___________________________________________________________________________')
+    # driver.find_element(By.CSS_SELECTOR, 'button[class="btn btn-default"]').click()
+
+
+def search_student():
+    # from openpyxl import Workbook
+    import openpyxl as O
+    Exel_file = "C:\\Users\\ks\\Desktop\\OXANA\\QA\\wgsty\\WEG_test_result.xlsx"
+    wb = O.load_workbook(Exel_file)
+    ws = wb.active
+
+    driver.find_element(By.LINK_TEXT, 'My WeGoStudy').click()
+    sleep(0.6)
+    driver.find_element(By.LINK_TEXT, 'Students').click()
+    sleep(0.6)
+    # driver.find_element(By.ID, 'search').send_keys(locators.first_name, locators.last_name)
+    driver.find_element(By.ID, 'search').send_keys (ws['A5'].value,' ', ws['B5'].value)
+    sleep(0.6)
+    driver.find_element(By.NAME, 'commit').click()
+
 
 def tearDown():
     if driver is not None:
@@ -208,24 +263,24 @@ def tearDown():
         driver.close()
         driver.quit()
 
-        logger('delleted')
+        logger('deleted')
 
 def logger(action: object):
     old_instance = sys.stdout
     log_file = open('message.log', 'a')
     sys.stdout = log_file
-    # print(f'{locators.user_email}\t'
-    #       f'{locators.first_name}\t'
-    #       f'{locators.last_name}\t'
-    #       f'{locators.mailing_address}\t'
-    #       f'{locators.postal_code}\t'
-    #       f'{datetime.phone_number()}\t'
-    #       f'{datetime.datetime.now()}\t'
-    #       f'{action}')
+    print(f'{locators.user_email}\t'
+          f'{locators.first_name}\t'
+          f'{locators.last_name}\t'
+          f'{locators.mailing_address}\t'
+          f'{locators.postal_code}\t'
+          f'{locators.phone_number}\t'
+          f'{datetime.datetime.now()}\t'
+          f'{action}')
     sys.stdout = old_instance
     log_file.close()
-    
-    
+
+
 def xlsx_data():
     from  openpyxl import Workbook
     import openpyxl as O
@@ -236,16 +291,28 @@ def xlsx_data():
                f'{locators.postal_code}',f'{locators.phone_number}', f'{locators.user_email}', f'{datetime.datetime.now()}',
                "test result"])
     wb.save(Exel_file)
+# _______________________________________________________
+#     ws['A5'] = f'{locators.first_name}'
+#     ws['B5'] = f'{locators.last_name}'
+#     ws['C5'] = f'{locators.passport_number}'
+#     ws['D5'] = f'{locators.mailing_address}'
+#     ws['E5'] = f'{locators.postal_code}'
+#     ws['F5'] = f'{locators.phone_number}'
+#     ws['G5'] = f'{locators.user_email}'
+#     ws['H5'] = f'{datetime.datetime.now()}'
+#     ws['I5'] = "test result"
+#     wb.save(Exel_file)
+# _________________________________________________
+
 
 
 setUp()
 login()
-# create_application()
 create_new_student()
 # create_application()
 # search_student()
 # delete_studnt()
-My_Referrals()
 xlsx_data()
-log_out()
-tearDown()
+# My_Referrals()
+# log_out()
+# tearDown()
